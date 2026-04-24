@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Celestún — Cuídalo, Vívelo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --yellow:  #F5B800;
+    --navy:    #1A2A5E;
+    --coral:   #D94F6C;
+    --teal:    #2CB5B2;
+    --sand:    #F5E6C8;
+    --white:   #FDFAF3;
+    --orange:  #E8692A;
+    --dark:    #0F1B3D;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: var(--navy);
+    color: var(--dark);
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  /* ── HEADER (centered) ── */
+  .app-header {
+    background: var(--navy);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px 9px;
+    z-index: 10;
+  }
+  .app-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--yellow);
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+  .app-header-sub {
+    font-size: 8px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  /* ── CONTENT ── */
+  .tab-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    background: var(--white);
+  }
+
+  .panel {
+    display: none;
+    min-height: 100%;
+    padding: 20px 16px 28px;
+    animation: fadeIn 0.28s ease;
+  }
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TAB BAR ── */
+  .tab-bar {
+    flex-shrink: 0;
+    background: var(--navy);
+    display: flex;
+    border-top: 3px solid rgba(255,255,255,0.08);
+    z-index: 10;
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 2px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    transition: background 0.18s;
+    position: relative;
+  }
+  .tab-btn:active { background: rgba(255,255,255,0.07); }
+  .tab-btn .tab-icon  { font-size: 20px; line-height: 1; }
+  .tab-btn .tab-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.06em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); transition: color 0.18s;
+  }
+  .tab-btn.active .tab-label { color: var(--yellow); }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 18%; right: 18%;
+    height: 3px;
+    background: var(--yellow);
+    border-radius: 0 0 4px 4px;
+  }
+
+  /* ── SHARED ── */
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 11px; border-radius: 100px; margin-bottom: 10px;
+  }
+  .tag-yellow { background: var(--yellow); color: var(--navy); }
+  .tag-coral  { background: var(--coral);  color: white; }
+  .tag-teal   { background: var(--teal);   color: white; }
+  .tag-navy   { background: var(--navy);   color: white; }
+  .tag-orange { background: var(--orange); color: white; }
+
+  .panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px; line-height: 1; color: var(--navy); margin-bottom: 14px;
+  }
+
+  /* ══ PANEL 1: BIENVENIDA ══ */
+
+  /* Emotional hero phrase */
+  .emotion-block {
+    background: linear-gradient(135deg, var(--navy) 0%, #253d8c 100%);
+    border-radius: 20px;
+    padding: 26px 22px;
+    text-align: center;
+    color: white;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .emotion-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 120%, var(--teal) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 85% 10%, var(--orange) 0%, transparent 55%);
+    opacity: 0.45;
+  }
+  .emotion-block * { position: relative; z-index: 1; }
+
+  .emotion-emoji {
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    animation: bob 3.5s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+
+  .emotion-phrase {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    line-height: 1.1;
+    color: var(--yellow);
+    letter-spacing: 0.03em;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+  }
+
+  .emotion-sub {
+    font-size: 13px;
+    line-height: 1.65;
+    opacity: 0.88;
+    font-weight: 600;
+  }
+  .emotion-sub .hl { color: var(--yellow); font-weight: 800; }
+
+  /* Stats */
+  .stat-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 14px; padding: 14px 10px; text-align: center;
+    box-shadow: 0 2px 12px rgba(26,42,94,0.08);
+    border-bottom: 3px solid var(--teal);
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; color: var(--navy); line-height: 1;
+  }
+  .stat-lbl { font-size: 10px; color: #555; font-weight: 700; margin-top: 2px; line-height: 1.3; }
+
+  .reserve-badge {
+    background: var(--sand); border-radius: 14px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px; border-left: 5px solid var(--teal);
+    margin-bottom: 14px;
+  }
+  .reserve-badge .badge-icon { font-size: 26px; flex-shrink: 0; }
+  .reserve-badge p { font-size: 12px; line-height: 1.55; color: #2a3a5e; font-weight: 700; }
+
+  .share-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--coral); color: white; border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+    letter-spacing: 0.06em; padding: 15px; border-radius: 14px;
+    width: 100%;
+    box-shadow: 0 4px 16px rgba(217,79,108,0.35);
+    transition: transform 0.15s;
+  }
+  .share-btn:active { transform: scale(0.97); }
+
+  /* ══ PANEL 2: REGLAMENTO ══ */
+  .rules-list { display: flex; flex-direction: column; gap: 10px; }
+  .rule-card {
+    border-radius: 14px; padding: 13px 14px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .rule-card.prohibido  { background: #FFF0F3; border: 2px solid var(--coral); }
+  .rule-card.permitido  { background: #F0FBF8; border: 2px solid var(--teal); }
+  .rule-card.precaucion { background: #FFFAED; border: 2px solid var(--yellow); }
+
+  .rule-icon { font-size: 24px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+  .rule-lbl  {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 2px;
+  }
+  .rule-card.prohibido  .rule-lbl { color: var(--coral); }
+  .rule-card.permitido  .rule-lbl { color: #1a9e8a; }
+  .rule-card.precaucion .rule-lbl { color: #b87d00; }
+  .rule-text { font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.35; }
+  .rule-sub  { font-size: 11px; color: #666; margin-top: 3px; font-weight: 600; line-height: 1.4; }
+
+  .divider-lbl {
+    text-align: center; font-size: 10px; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #bbb;
+    display: flex; align-items: center; gap: 8px; margin: 8px 0 4px;
+  }
+  .divider-lbl::before, .divider-lbl::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
+
+  /* ══ PANEL 3: FAUNA + CURIOSIDADES ══ */
+  .sub-tabs {
+    display: flex; gap: 8px; margin-bottom: 16px;
+  }
+  .sub-tab {
+    flex: 1; padding: 8px 6px; border-radius: 10px; border: 2px solid transparent;
+    background: #f0f0f0; font-size: 12px; font-weight: 800; cursor: pointer;
+    text-align: center; transition: all 0.18s; color: #888;
+    font-family: 'Nunito', sans-serif;
+  }
+  .sub-tab.active { background: var(--teal); color: white; border-color: var(--teal); }
+
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+
+  /* Species */
+  .species-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+  }
+  .species-card {
+    background: white; border-radius: 16px; padding: 16px 12px 12px;
+    text-align: center; box-shadow: 0 2px 12px rgba(26,42,94,0.08); border: 2px solid transparent;
+  }
+  .species-card.sc-flamingo { border-color: var(--coral); }
+  .species-card.sc-tortuga  { border-color: var(--teal); }
+  .species-card.sc-manglar  { border-color: #3a9e5f; }
+  .species-card.sc-marina   { border-color: var(--orange); }
+
+  .sp-emoji  { font-size: 38px; line-height: 1; margin-bottom: 6px; }
+  .sp-name   { font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--navy); line-height: 1.1; margin-bottom: 4px; }
+  .sp-fact   { font-size: 10px; color: #555; line-height: 1.4; font-weight: 600; }
+  .sp-status {
+    display: inline-block; margin-top: 7px; font-size: 9px; font-weight: 800;
+    letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px;
+  }
+  .st-peligro   { background: #FFE0E6; color: var(--coral); }
+  .st-protegido { background: #DFF5F0; color: #1a9e8a; }
+
+  .eco-note {
+    background: linear-gradient(135deg,#e4f8f5,#ccede9);
+    border-radius: 14px; padding: 16px; border-left: 5px solid var(--teal);
+  }
+  .eco-note p { font-size: 13px; line-height: 1.6; color: #1a4a44; font-weight: 600; }
+
+  /* Curiosidades */
+  .curious-list { display: flex; flex-direction: column; gap: 12px; }
+  .curious-card { border-radius: 16px; padding: 16px; position: relative; overflow: hidden; }
+  .curious-card.c1 { background: linear-gradient(135deg,#FFF8E0,#FFEDAA); }
+  .curious-card.c2 { background: linear-gradient(135deg,#E0F8F5,#B8EDEA); }
+  .curious-card.c3 { background: linear-gradient(135deg,#FFE8ED,#FFCDD8); }
+  .curious-card.c4 { background: linear-gradient(135deg,#E8F0FF,#C8D8FF); }
+  .curious-card.c5 { background: linear-gradient(135deg,#FFF0E6,#FFDFC4); }
+  .curious-card.c6 { background: linear-gradient(135deg,#ECFFE8,#C8F0C0); }
+
+  .c-num  {
+    font-family: 'Bebas Neue', sans-serif; font-size: 44px;
+    opacity: 0.1; position: absolute; right: 12px; top: 6px; color: var(--navy); line-height: 1;
+  }
+  .c-emoji { font-size: 22px; margin-bottom: 6px; }
+  .c-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+  .c-text  { font-size: 12px; line-height: 1.55; color: #2a3a5e; font-weight: 600; }
+
+  .info-box {
+    background: var(--sand); border-radius: 14px; padding: 14px;
+    margin-top: 12px; border: 2px dashed var(--orange);
+  }
+  .info-box-title {
+    font-size: 12px; font-weight: 800; color: var(--orange);
+    margin-bottom: 5px; display: flex; align-items: center; gap: 5px;
+  }
+  .info-box p { font-size: 12px; line-height: 1.55; color: #443322; font-weight: 600; }
+
+  /* ══ PANEL 4: AYUDA ══ */
+  .help-intro {
+    background: linear-gradient(135deg, var(--coral), #be3459);
+    border-radius: 16px; padding: 16px; color: white; margin-bottom: 14px;
+  }
+  .help-intro p { font-size: 13px; line-height: 1.6; opacity: 0.95; }
+
+  .action-list { display: flex; flex-direction: column; gap: 9px; }
+  .action-item {
+    background: white; border-radius: 14px; padding: 13px 14px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-left: 5px solid var(--navy);
+  }
+  .action-item.a1 { border-color: var(--coral); }
+  .action-item.a2 { border-color: var(--teal); }
+  .action-item.a3 { border-color: var(--yellow); }
+  .action-item.a4 { border-color: var(--orange); }
+  .action-item.a5 { border-color: #3a9e5f; }
+
+  .act-icon  { font-size: 26px; flex-shrink: 0; }
+  .act-title { font-size: 13px; font-weight: 800; color: var(--dark); }
+  .act-desc  { font-size: 11px; color: #666; margin-top: 2px; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- HEADER (centered) -->
+  <header class="app-header">
+    <div class="app-header-title">CELESTÚN</div>
+    <div class="app-header-sub">Reserva de la Biósfera · Yucatán</div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="tab-content" id="tab-content">
+
+    <!-- ══ PANEL 1: BIENVENIDA ══ -->
+    <div class="panel active" id="panel-bienvenida">
+
+      <!-- Emotional hero -->
+      <div class="emotion-block">
+        <span class="emotion-emoji">🦩</span>
+        <div class="emotion-phrase">Hay lugares que no pueden cuidarse solos.</div>
+        <p class="emotion-sub">
+          Celestún es una <span class="hl">Reserva de la Biósfera</span> de fama mundial.
+          Sus flamencos, tortugas y manglares dependen de cada persona que la visita.
+          <br><br>
+          Esa persona eres tú. Bienvenido.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">15K+</div>
+          <div class="stat-lbl">visitantes al día en temporada alta</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">90K</div>
+          <div class="stat-lbl">crías de tortuga liberadas en 2025</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">#1</div>
+          <div class="stat-lbl">colonia de flamencos en América del Norte</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">59K</div>
+          <div class="stat-lbl">hectáreas de ecosistema protegido</div>
+        </div>
+      </div>
+
+      <!-- Context note -->
+      <div class="reserve-badge">
+        <div class="badge-icon">💧</div>
+        <p>La ría mezcla agua dulce subterránea y agua marina, creando uno de los estuarios más productivos del país. Si se daña, colapsa toda la economía local.</p>
+      </div>
+
+      <!-- Share button -->
+      <button class="share-btn" onclick="shareApp()">
+        🌿 Comparte este sitio con quien venga a Celestún
+      </button>
+
+    </div>
+
+    <!-- ══ PANEL 2: REGLAMENTO ══ -->
+    <div class="panel" id="panel-reglamento">
+      <div class="section-tag tag-coral">📋 Reglamento</div>
+      <h2 class="panel-title">Reglas Básicas</h2>
+      <div class="rules-list">
+
+        <div class="divider-lbl">🚫 Prohibido</div>
+
+        <div class="rule-card prohibido">
+          <div class="rule-icon">🗑️</div>
+          <div>
+            <div class="rule-lbl">Prohibido</div>
+            <div class="rule-text">No tirar basura en playas, manglares ni agua</div>
+            <div class="rule-sub">Los plásticos y tapas de cerveza son los contaminantes más frecuentes. Lleva tus residuos contigo.</div>
+          </div>
+        </div>
+        <div class="rule-card prohibido">
+          <div class="rule-icon">🚗</div>
+          <div>
+            <div class="rule-lbl">Prohibido</div>
+            <div class="rule-text">No ingresar a manglares con vehículos motorizados</div>
+            <div class="rule-sub">Destruyen las raíces del manglar de forma irreversible.</div>
+          </div>
+        </div>
+        <div class="rule-card prohibido">
+          <div class="rule-icon">🤳</div>
+          <div>
+            <div class="rule-lbl">Prohibido</div>
+            <div class="rule-text">No alimentar ni tocar animales silvestres</div>
+            <div class="rule-sub">Cambia su dieta y comportamiento natural. Observa desde la distancia.</div>
+          </div>
+        </div>
+        <div class="rule-card prohibido">
+          <div class="rule-icon">🚁</div>
+          <div>
+            <div class="rule-lbl">Prohibido</div>
+            <div class="rule-text">No usar drones en zonas de fauna</div>
+            <div class="rule-sub">El ruido ahuyenta a las aves de sus zonas de anidación.</div>
+          </div>
+        </div>
+        <div class="rule-card prohibido">
+          <div class="rule-icon">🐟</div>
+          <div>
+            <div class="rule-lbl">Prohibido</div>
+            <div class="rule-text">No dejar restos de pescado al aire libre</div>
+            <div class="rule-sub">Atrae perros callejeros que desplazan a la fauna nativa.</div>
+          </div>
+        </div>
+
+        <div class="divider-lbl">⚠️ Precaución</div>
+
+        <div class="rule-card precaucion">
+          <div class="rule-icon">🐢</div>
+          <div>
+            <div class="rule-lbl">Precaución</div>
+            <div class="rule-text">Zona de anidación de tortugas (Jun–Sep)</div>
+            <div class="rule-sub">Evita caminar en la orilla de noche. Si ves una tortuga, silencio y sin flash.</div>
+          </div>
+        </div>
+        <div class="rule-card precaucion">
+          <div class="rule-icon">🌿</div>
+          <div>
+            <div class="rule-lbl">Precaución</div>
+            <div class="rule-text">No retires el sargazo de la arena</div>
+            <div class="rule-sub">En Celestún el sargazo se entierra: es fertilizante natural que fortalece la duna.</div>
+          </div>
+        </div>
+
+        <div class="divider-lbl">✅ Buenas prácticas</div>
+
+        <div class="rule-card permitido">
+          <div class="rule-icon">🧴</div>
+          <div>
+            <div class="rule-lbl">Recomendado</div>
+            <div class="rule-text">Usa bloqueador solar biodegradable</div>
+            <div class="rule-sub">Los bloqueadores convencionales dañan el ecosistema marino.</div>
+          </div>
+        </div>
+        <div class="rule-card permitido">
+          <div class="rule-icon">🤝</div>
+          <div>
+            <div class="rule-lbl">Recomendado</div>
+            <div class="rule-text">Respeta a la comunidad local y sus tradiciones</div>
+            <div class="rule-sub">Pescadores y lancheros son custodios del ecosistema. Trátalos con respeto.</div>
+          </div>
+        </div>
+        <div class="rule-card permitido">
+          <div class="rule-icon">🚶</div>
+          <div>
+            <div class="rule-lbl">Recomendado</div>
+            <div class="rule-text">Sigue las rutas autorizadas en la reserva</div>
+            <div class="rule-sub">Protegen al visitante y las zonas más vulnerables del ecosistema.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ PANEL 3: FAUNA + CURIOSIDADES ══ -->
+    <div class="panel" id="panel-fauna">
+      <div class="section-tag tag-teal">🌿 Conoce Celestún</div>
+      <h2 class="panel-title">La vida que compartes aquí</h2>
+
+      <!-- Sub-tabs -->
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-sub="especies" onclick="switchSub(this)">🦩 Fauna</button>
+        <button class="sub-tab" data-sub="datos" onclick="switchSub(this)">💡 Curiosidades</button>
+      </div>
+
+      <!-- Sub-panel: Fauna -->
+      <div class="sub-panel active" id="sub-especies">
+        <div class="species-grid">
+          <div class="species-card sc-flamingo">
+            <div class="sp-emoji">🦩</div>
+            <div class="sp-name">Flamenco Rosado</div>
+            <div class="sp-fact">La colonia más grande de América del Norte vive aquí</div>
+            <span class="sp-status st-protegido">Protegido</span>
+          </div>
+          <div class="species-card sc-tortuga">
+            <div class="sp-emoji">🐢</div>
+            <div class="sp-name">Tortuga Marina</div>
+            <div class="sp-fact">Carey y Blanca anidan en las playas jun–sep</div>
+            <span class="sp-status st-peligro">En peligro</span>
+          </div>
+          <div class="species-card sc-manglar">
+            <div class="sp-emoji">🌿</div>
+            <div class="sp-name">Manglar</div>
+            <div class="sp-fact">Barrera natural contra huracanes y hogar de cientos de especies</div>
+            <span class="sp-status st-protegido">Ecosistema clave</span>
+          </div>
+          <div class="species-card sc-marina">
+            <div class="sp-emoji">🐟</div>
+            <div class="sp-name">Fauna Marina</div>
+            <div class="sp-fact">Estuario único de agua dulce y salada, alta biodiversidad</div>
+            <span class="sp-status st-protegido">Alta biodiversidad</span>
+          </div>
+        </div>
+        <div class="eco-note">
+          <p>🌊 <strong>¿Por qué son tan importantes los manglares?</strong><br><br>Sus raíces filtran el agua, protegen la costa de la erosión y capturan carbono. Son el hogar de peces, cangrejos y aves. Si un manglar desaparece, todo el ecosistema colapsa.</p>
+        </div>
+      </div>
+
+      <!-- Sub-panel: Curiosidades -->
+      <div class="sub-panel" id="sub-datos">
+        <div class="curious-list">
+          <div class="curious-card c1">
+            <div class="c-num">01</div>
+            <div class="c-emoji">💧</div>
+            <div class="c-title">El suelo yucateco no filtra, conecta</div>
+            <div class="c-text">Yucatán tiene un sistema kárstico muy permeable. Cualquier basura puede llegar al acuífero y terminar en el mar. Más del 90% de las aguas residuales no reciben tratamiento antes de infiltrarse.</div>
+          </div>
+          <div class="curious-card c2">
+            <div class="c-num">02</div>
+            <div class="c-emoji">🦩</div>
+            <div class="c-title">El flamenco se pone rosa por su dieta</div>
+            <div class="c-text">Los flamencos nacen blancos. Su color viene de los betacarotenos de crustáceos y algas que comen en la ría. Si se estresa o deja de comer bien, pierde su color rosa.</div>
+          </div>
+          <div class="curious-card c3">
+            <div class="c-num">03</div>
+            <div class="c-emoji">🌿</div>
+            <div class="c-title">El sargazo no es basura</div>
+            <div class="c-text">A diferencia de Quintana Roo, Celestún recibe poco sargazo. Enterrarlo en la arena es lo correcto: actúa como fertilizante natural que blanquea la playa y fortalece la duna.</div>
+          </div>
+          <div class="curious-card c4">
+            <div class="c-num">04</div>
+            <div class="c-emoji">🐢</div>
+            <div class="c-title">Las tortugas regresan siempre al mismo lugar</div>
+            <div class="c-text">La tortuga blanca regresa a desovar exactamente en la playa donde nació. En 2025 se liberaron más de 90,000 crías en toda la costa yucateca.</div>
+          </div>
+          <div class="curious-card c5">
+            <div class="c-num">05</div>
+            <div class="c-emoji">🏘️</div>
+            <div class="c-title">Pueblo pequeño, impacto enorme</div>
+            <div class="c-text">Celestún tiene 8,389 habitantes pero recibe más de 15,000 turistas al día en temporada alta — casi el doble de su población llegando cada 24 horas.</div>
+          </div>
+          <div class="curious-card c6">
+            <div class="c-num">06</div>
+            <div class="c-emoji">⚡</div>
+            <div class="c-title">7,000 voluntarios, 33 toneladas</div>
+            <div class="c-text">En 2025, más de 7,000 voluntarios participaron en jornadas de limpieza en Yucatán, retirando más de 33 toneladas de residuos de las playas.</div>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">🌀 Las dunas son irremplazables</div>
+          <p>Yucatán ha perdido en promedio 70 cm de playa por año desde 1980. Cuando se remueven dunas para construir, se pierde la barrera natural contra huracanes.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ PANEL 4: AYUDA ══ -->
+    <div class="panel" id="panel-ayuda">
+      <div class="section-tag tag-navy">🤝 Ayuda</div>
+      <h2 class="panel-title">Tú puedes hacer la diferencia</h2>
+      <div class="help-intro">
+        <p>No tienes que ser experto. Cualquier acción suma. Desde tu visita, tu negocio o tu comunidad, hay algo que puedes hacer hoy por Celestún.</p>
+      </div>
+      <div class="action-list">
+        <div class="action-item a1">
+          <div class="act-icon">🚯</div>
+          <div>
+            <div class="act-title">Sal con tu basura como llegaste</div>
+            <div class="act-desc">Lleva una bolsa y recoge lo tuyo. Si puedes, recoge lo de alguien más también.</div>
+          </div>
+        </div>
+        <div class="action-item a2">
+          <div class="act-icon">📢</div>
+          <div>
+            <div class="act-title">Comparte este sitio</div>
+            <div class="act-desc">Manda el link a tu familia y amigos antes de que visiten Celestún.</div>
+          </div>
+        </div>
+        <div class="action-item a3">
+          <div class="act-icon">🐢</div>
+          <div>
+            <div class="act-title">Únete a un campamento tortuguero</div>
+            <div class="act-desc">De junio a septiembre hay voluntariados nocturnos de protección de nidos. No se requiere experiencia previa.</div>
+          </div>
+        </div>
+        <div class="action-item a4">
+          <div class="act-icon">🛒</div>
+          <div>
+            <div class="act-title">Consume local</div>
+            <div class="act-desc">Prefiere restaurantes, lancheros y guías locales. El ecoturismo comunitario es la mejor forma de proteger el ecosistema.</div>
+          </div>
+        </div>
+        <div class="action-item a5">
+          <div class="act-icon">🌿</div>
+          <div>
+            <div class="act-title">Participa en jornadas de limpieza</div>
+            <div class="act-desc">La Secretaría de Desarrollo Sustentable organiza jornadas periódicas. Síguelos en redes para conocer las próximas fechas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-content -->
+
+  <!-- TAB BAR (4 tabs now) -->
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-panel="bienvenida">
+      <span class="tab-icon">🌊</span>
+      <span class="tab-label">Inicio</span>
+    </button>
+    <button class="tab-btn" data-panel="reglamento">
+      <span class="tab-icon">📋</span>
+      <span class="tab-label">Reglas</span>
+    </button>
+    <button class="tab-btn" data-panel="fauna">
+      <span class="tab-icon">🌿</span>
+      <span class="tab-label">Conoce</span>
+    </button>
+    <button class="tab-btn" data-panel="ayuda">
+      <span class="tab-icon">🤝</span>
+      <span class="tab-label">Ayuda</span>
+    </button>
+  </nav>
+
+</div>
+
+<script>
+  // Main tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels  = document.querySelectorAll('.panel');
+  const content = document.getElementById('tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      panels.forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      content.scrollTop = 0;
+    });
+  });
+
+  // Sub-tabs inside Conoce
+  function switchSub(btn) {
+    document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('sub-' + btn.dataset.sub).classList.add('active');
+    content.scrollTop = 0;
+  }
+
+  // Share
+  function shareApp() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Celestún — Cuídalo, Vívelo',
+        text: '¡Visita Celestún con responsabilidad! Todo lo que necesitas saber sobre cómo cuidar sus playas, manglares y fauna.',
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('¡Enlace copiado! Compártelo con quien quiera visitar Celestún.');
+      });
+    }
+  }
+</script>
+</body>
+</html>
