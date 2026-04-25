@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+ 
 <style>
   :root {
     --yellow:  #F5B800;
@@ -19,9 +19,9 @@
     --orange:  #E8692A;
     --dark:    #0F1B3D;
   }
-
+ 
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+ 
   html, body {
     height: 100%;
     overflow: hidden;
@@ -31,7 +31,7 @@
     max-width: 430px;
     margin: 0 auto;
   }
-
+ 
   #app {
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@
     background: var(--white);
     overflow: hidden;
   }
-
+ 
   /* ── HEADER (centered) ── */
   .app-header {
     background: var(--navy);
@@ -66,7 +66,7 @@
     text-transform: uppercase;
     margin-top: 1px;
   }
-
+ 
   /* ── CONTENT ── */
   .tab-content {
     flex: 1;
@@ -76,7 +76,7 @@
     overscroll-behavior: contain;
     background: var(--white);
   }
-
+ 
   .panel {
     display: none;
     min-height: 100%;
@@ -84,12 +84,12 @@
     animation: fadeIn 0.28s ease;
   }
   .panel.active { display: block; }
-
+ 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
+ 
   /* ── TAB BAR ── */
   .tab-bar {
     flex-shrink: 0;
@@ -126,7 +126,7 @@
     background: var(--yellow);
     border-radius: 0 0 4px 4px;
   }
-
+ 
   /* ── SHARED ── */
   .section-tag {
     display: inline-flex; align-items: center; gap: 6px;
@@ -138,14 +138,14 @@
   .tag-teal   { background: var(--teal);   color: white; }
   .tag-navy   { background: var(--navy);   color: white; }
   .tag-orange { background: var(--orange); color: white; }
-
+ 
   .panel-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 34px; line-height: 1; color: var(--navy); margin-bottom: 14px;
   }
-
+ 
   /* ══ PANEL 1: BIENVENIDA ══ */
-
+ 
   /* Emotional hero phrase */
   .emotion-block {
     background: linear-gradient(135deg, var(--navy) 0%, #253d8c 100%);
@@ -167,7 +167,7 @@
     opacity: 0.45;
   }
   .emotion-block * { position: relative; z-index: 1; }
-
+ 
   .emotion-emoji {
     font-size: 52px;
     line-height: 1;
@@ -180,7 +180,7 @@
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-7px); }
   }
-
+ 
   .emotion-phrase {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 30px;
@@ -190,7 +190,7 @@
     margin-bottom: 12px;
     text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
   }
-
+ 
   .emotion-sub {
     font-size: 13px;
     line-height: 1.65;
@@ -198,7 +198,7 @@
     font-weight: 600;
   }
   .emotion-sub .hl { color: var(--yellow); font-weight: 800; }
-
+ 
   /* Stats */
   .stat-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
@@ -214,7 +214,7 @@
     font-size: 32px; color: var(--navy); line-height: 1;
   }
   .stat-lbl { font-size: 10px; color: #555; font-weight: 700; margin-top: 2px; line-height: 1.3; }
-
+ 
   .reserve-badge {
     background: var(--sand); border-radius: 14px; padding: 14px 16px;
     display: flex; align-items: center; gap: 12px; border-left: 5px solid var(--teal);
@@ -222,7 +222,7 @@
   }
   .reserve-badge .badge-icon { font-size: 26px; flex-shrink: 0; }
   .reserve-badge p { font-size: 12px; line-height: 1.55; color: #2a3a5e; font-weight: 700; }
-
+ 
   .share-btn {
     display: flex; align-items: center; justify-content: center; gap: 8px;
     background: var(--coral); color: white; border: none; cursor: pointer;
@@ -233,7 +233,7 @@
     transition: transform 0.15s;
   }
   .share-btn:active { transform: scale(0.97); }
-
+ 
   /* ══ PANEL 2: REGLAMENTO ══ */
   .rules-list { display: flex; flex-direction: column; gap: 10px; }
   .rule-card {
@@ -243,7 +243,7 @@
   .rule-card.prohibido  { background: #FFF0F3; border: 2px solid var(--coral); }
   .rule-card.permitido  { background: #F0FBF8; border: 2px solid var(--teal); }
   .rule-card.precaucion { background: #FFFAED; border: 2px solid var(--yellow); }
-
+ 
   .rule-icon { font-size: 24px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
   .rule-lbl  {
     font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
@@ -254,14 +254,14 @@
   .rule-card.precaucion .rule-lbl { color: #b87d00; }
   .rule-text { font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.35; }
   .rule-sub  { font-size: 11px; color: #666; margin-top: 3px; font-weight: 600; line-height: 1.4; }
-
+ 
   .divider-lbl {
     text-align: center; font-size: 10px; font-weight: 800;
     letter-spacing: 0.12em; text-transform: uppercase; color: #bbb;
     display: flex; align-items: center; gap: 8px; margin: 8px 0 4px;
   }
   .divider-lbl::before, .divider-lbl::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
-
+ 
   /* ══ PANEL 3: FAUNA + CURIOSIDADES ══ */
   .sub-tabs {
     display: flex; gap: 8px; margin-bottom: 16px;
@@ -273,10 +273,10 @@
     font-family: 'Nunito', sans-serif;
   }
   .sub-tab.active { background: var(--teal); color: white; border-color: var(--teal); }
-
+ 
   .sub-panel { display: none; }
   .sub-panel.active { display: block; }
-
+ 
   /* Species */
   .species-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
@@ -289,7 +289,7 @@
   .species-card.sc-tortuga  { border-color: var(--teal); }
   .species-card.sc-manglar  { border-color: #3a9e5f; }
   .species-card.sc-marina   { border-color: var(--orange); }
-
+ 
   .sp-emoji  { font-size: 38px; line-height: 1; margin-bottom: 6px; }
   .sp-name   { font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--navy); line-height: 1.1; margin-bottom: 4px; }
   .sp-fact   { font-size: 10px; color: #555; line-height: 1.4; font-weight: 600; }
@@ -299,13 +299,13 @@
   }
   .st-peligro   { background: #FFE0E6; color: var(--coral); }
   .st-protegido { background: #DFF5F0; color: #1a9e8a; }
-
+ 
   .eco-note {
     background: linear-gradient(135deg,#e4f8f5,#ccede9);
     border-radius: 14px; padding: 16px; border-left: 5px solid var(--teal);
   }
   .eco-note p { font-size: 13px; line-height: 1.6; color: #1a4a44; font-weight: 600; }
-
+ 
   /* Curiosidades */
   .curious-list { display: flex; flex-direction: column; gap: 12px; }
   .curious-card { border-radius: 16px; padding: 16px; position: relative; overflow: hidden; }
@@ -315,7 +315,7 @@
   .curious-card.c4 { background: linear-gradient(135deg,#E8F0FF,#C8D8FF); }
   .curious-card.c5 { background: linear-gradient(135deg,#FFF0E6,#FFDFC4); }
   .curious-card.c6 { background: linear-gradient(135deg,#ECFFE8,#C8F0C0); }
-
+ 
   .c-num  {
     font-family: 'Bebas Neue', sans-serif; font-size: 44px;
     opacity: 0.1; position: absolute; right: 12px; top: 6px; color: var(--navy); line-height: 1;
@@ -323,7 +323,7 @@
   .c-emoji { font-size: 22px; margin-bottom: 6px; }
   .c-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
   .c-text  { font-size: 12px; line-height: 1.55; color: #2a3a5e; font-weight: 600; }
-
+ 
   .info-box {
     background: var(--sand); border-radius: 14px; padding: 14px;
     margin-top: 12px; border: 2px dashed var(--orange);
@@ -333,14 +333,14 @@
     margin-bottom: 5px; display: flex; align-items: center; gap: 5px;
   }
   .info-box p { font-size: 12px; line-height: 1.55; color: #443322; font-weight: 600; }
-
+ 
   /* ══ PANEL 4: AYUDA ══ */
   .help-intro {
     background: linear-gradient(135deg, var(--coral), #be3459);
     border-radius: 16px; padding: 16px; color: white; margin-bottom: 14px;
   }
   .help-intro p { font-size: 13px; line-height: 1.6; opacity: 0.95; }
-
+ 
   .action-list { display: flex; flex-direction: column; gap: 9px; }
   .action-item {
     background: white; border-radius: 14px; padding: 13px 14px;
@@ -352,7 +352,7 @@
   .action-item.a3 { border-color: var(--yellow); }
   .action-item.a4 { border-color: var(--orange); }
   .action-item.a5 { border-color: #3a9e5f; }
-
+ 
   .act-icon  { font-size: 26px; flex-shrink: 0; }
   .act-title { font-size: 13px; font-weight: 800; color: var(--dark); }
   .act-desc  { font-size: 11px; color: #666; margin-top: 2px; line-height: 1.4; }
@@ -360,19 +360,19 @@
 </head>
 <body>
 <div id="app">
-
+ 
   <!-- HEADER (centered) -->
   <header class="app-header">
     <div class="app-header-title">CELESTÚN</div>
     <div class="app-header-sub">Reserva de la Biósfera · Yucatán</div>
   </header>
-
+ 
   <!-- CONTENT -->
   <div class="tab-content" id="tab-content">
-
+ 
     <!-- ══ PANEL 1: BIENVENIDA ══ -->
     <div class="panel active" id="panel-bienvenida">
-
+ 
       <!-- Emotional hero -->
       <div class="emotion-block">
         <img src="https://yucatan.travel/wp-content/uploads/2019/11/rio-de-los-flamingos-celestun-yucatan.jpg" alt="Vista de Celestún" 
@@ -385,7 +385,7 @@
           Esa persona eres tú. Bienvenido.
         </p>
       </div>
-
+ 
       <!-- Stats -->
       <div class="stat-grid">
         <div class="stat-card">
@@ -405,28 +405,28 @@
           <div class="stat-lbl">hectáreas de ecosistema protegido</div>
         </div>
       </div>
-
+ 
       <!-- Context note -->
       <div class="reserve-badge">
         <div class="badge-icon">💧</div>
         <p>La ría mezcla agua dulce subterránea y agua marina, creando uno de los estuarios más productivos del país. Si se daña, colapsa toda la economía local.</p>
       </div>
-
+ 
       <!-- Share button -->
       <button class="share-btn" onclick="shareApp()">
         🌿 Comparte este sitio con quien venga a Celestún
       </button>
-
+ 
     </div>
-
+ 
     <!-- ══ PANEL 2: REGLAMENTO ══ -->
     <div class="panel" id="panel-reglamento">
       <div class="section-tag tag-coral">📋 Reglamento</div>
       <h2 class="panel-title">Reglas Básicas</h2>
       <div class="rules-list">
-
+ 
         <div class="divider-lbl">🚫 Prohibido</div>
-
+ 
         <div class="rule-card prohibido">
           <div class="rule-icon">🗑️</div>
           <div>
@@ -467,9 +467,9 @@
             <div class="rule-sub">Atrae perros callejeros que desplazan a la fauna nativa.</div>
           </div>
         </div>
-
+ 
         <div class="divider-lbl">⚠️ Precaución</div>
-
+ 
         <div class="rule-card precaucion">
           <div class="rule-icon">🐢</div>
           <div>
@@ -486,9 +486,9 @@
             <div class="rule-sub">En Celestún el sargazo se entierra: es fertilizante natural que fortalece la duna.</div>
           </div>
         </div>
-
+ 
         <div class="divider-lbl">✅ Buenas prácticas</div>
-
+ 
         <div class="rule-card permitido">
           <div class="rule-icon">🧴</div>
           <div>
@@ -513,48 +513,44 @@
             <div class="rule-sub">Protegen al visitante y las zonas más vulnerables del ecosistema.</div>
           </div>
         </div>
-
+ 
       </div>
     </div>
-
+ 
     <!-- ══ PANEL 3: FAUNA + CURIOSIDADES ══ -->
     <div class="panel" id="panel-fauna">
       <div class="section-tag tag-teal">🌿 Conoce Celestún</div>
       <h2 class="panel-title">La vida que compartes aquí</h2>
-
+ 
       <!-- Sub-tabs -->
       <div class="sub-tabs">
         <button class="sub-tab active" data-sub="especies" onclick="switchSub(this)">🦩 Fauna</button>
         <button class="sub-tab" data-sub="datos" onclick="switchSub(this)">💡 Curiosidades</button>
       </div>
-
+ 
       <!-- Sub-panel: Fauna -->
       <div class="sub-panel active" id="sub-especies">
         <div class="species-grid">
           <div class="species-card sc-flamingo">
-            <img src="https://www.gob.mx/cms/uploads/image/file/189032/Caribean_flamingos.jpg.jpg" 
-         alt="Flamenco en Celestún" 
+            <div class="sp-emoji">🦩</div>
             <div class="sp-name">Flamenco Rosado</div>
             <div class="sp-fact">La colonia más grande de América del Norte vive aquí</div>
             <span class="sp-status st-protegido">Protegido</span>
           </div>
           <div class="species-card sc-tortuga">
-             <img src="https://wwflac.awsassets.panda.org/img/turtles_hero_563115.jpg" 
-         alt="Tortuga Marina" 
+            <div class="sp-emoji">🐢</div>
             <div class="sp-name">Tortuga Marina</div>
             <div class="sp-fact">Carey y Blanca anidan en las playas jun–sep</div>
             <span class="sp-status st-peligro">En peligro</span>
           </div>
           <div class="species-card sc-manglar">
-          <img src="https://cdn2.civitatis.com/mexico/merida/galeria/celestun-vistas-manglar.jpg" 
-         alt="Manglar"  
+            <div class="sp-emoji">🌿</div>
             <div class="sp-name">Manglar</div>
             <div class="sp-fact">Barrera natural contra huracanes y hogar de cientos de especies</div>
             <span class="sp-status st-protegido">Ecosistema clave</span>
           </div>
           <div class="species-card sc-marina">
-          <div class="sp-emoji">🐟</div>
-         alt="Fauna Marina" 
+            <div class="sp-emoji">🐟</div>
             <div class="sp-name">Fauna Marina</div>
             <div class="sp-fact">Estuario único de agua dulce y salada, alta biodiversidad</div>
             <span class="sp-status st-protegido">Alta biodiversidad</span>
@@ -564,7 +560,7 @@
           <p>🌊 <strong>¿Por qué son tan importantes los manglares?</strong><br><br>Sus raíces filtran el agua, protegen la costa de la erosión y capturan carbono. Son el hogar de peces, cangrejos y aves. Si un manglar desaparece, todo el ecosistema colapsa.</p>
         </div>
       </div>
-
+ 
       <!-- Sub-panel: Curiosidades -->
       <div class="sub-panel" id="sub-datos">
         <div class="curious-list">
@@ -610,9 +606,9 @@
           <p>Yucatán ha perdido en promedio 70 cm de playa por año desde 1980. Cuando se remueven dunas para construir, se pierde la barrera natural contra huracanes.</p>
         </div>
       </div>
-
+ 
     </div>
-
+ 
     <!-- ══ PANEL 4: AYUDA ══ -->
     <div class="panel" id="panel-ayuda">
       <div class="section-tag tag-navy">🤝 Ayuda</div>
@@ -658,9 +654,9 @@
         </div>
       </div>
     </div>
-
+ 
   </div><!-- /tab-content -->
-
+ 
   <!-- TAB BAR (4 tabs now) -->
   <nav class="tab-bar">
     <button class="tab-btn active" data-panel="bienvenida">
@@ -680,15 +676,15 @@
       <span class="tab-label">Ayuda</span>
     </button>
   </nav>
-
+ 
 </div>
-
+ 
 <script>
   // Main tabs
   const tabBtns = document.querySelectorAll('.tab-btn');
   const panels  = document.querySelectorAll('.panel');
   const content = document.getElementById('tab-content');
-
+ 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       panels.forEach(p => p.classList.remove('active'));
@@ -698,7 +694,7 @@
       content.scrollTop = 0;
     });
   });
-
+ 
   // Sub-tabs inside Conoce
   function switchSub(btn) {
     document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
@@ -707,7 +703,7 @@
     document.getElementById('sub-' + btn.dataset.sub).classList.add('active');
     content.scrollTop = 0;
   }
-
+ 
   // Share
   function shareApp() {
     if (navigator.share) {
@@ -725,3 +721,4 @@
 </script>
 </body>
 </html>
+ 
