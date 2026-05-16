@@ -20,7 +20,7 @@ npm run preview   # previsualizar el build
 
 ## Deploy en GitHub Pages
 
-El deploy es automático vía GitHub Actions al hacer push a `main`.
+El código fuente vive en la rama `main`. GitHub Actions construye el proyecto y publica los archivos compilados en la rama `gh-pages`, que es la que sirve GitHub Pages.
 
 ### Primera vez
 
@@ -29,10 +29,8 @@ El deploy es automático vía GitHub Actions al hacer push a `main`.
 git add .
 git commit -m "feat: initial commit"
 
-# 2. Push a main (force necesario por historial no relacionado en el remoto)
+# 2. Push a main
 git push origin master:main --force
-
-# 3. En GitHub → Settings → Pages → Source: seleccionar "gh-pages" branch
 ```
 
 ### Deploys posteriores
@@ -43,6 +41,6 @@ git commit -m "tu mensaje"
 git push origin master:main
 ```
 
-El workflow `.github/workflows/deploy.yml` se ejecuta automáticamente y publica el build en la rama `gh-pages`.
+El workflow se dispara con cada push a `main`, construye el proyecto y sobreescribe `gh-pages` con los archivos del build.
 
 **URL del sitio:** `https://emipeck17-max.github.io/celestun-web/`
