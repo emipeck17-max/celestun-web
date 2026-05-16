@@ -1,0 +1,33 @@
+.font-display-lg {
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-title-md {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-body-lg,
+.font-body-sm,
+.font-label-caps {
+  font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.font-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.font-label-caps {
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
